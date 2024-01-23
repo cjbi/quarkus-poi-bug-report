@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /**
  * @author cjbi
@@ -30,6 +29,7 @@ public class Main {
         private void output(Workbook workbook) {
             String tempDir = System.getProperty("java.io.tmpdir");
             String path = tempDir + File.separator + "test_" + DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()) + ".xls";
+            LOGGER.info("------------Temp file path:" + path);
             File file = new File(path);
             try (OutputStream os = new FileOutputStream(file)) {
                 workbook.write(os);
@@ -45,7 +45,6 @@ public class Main {
             LOGGER.info("------------Application started");
             Workbook workbook = new HSSFWorkbook();
             Sheet sheet = workbook.createSheet("Sheet 1");
-            // 自适应宽度
             sheet.autoSizeColumn(1);
             sheet.setDefaultColumnWidth(20);
             Row headRow = sheet.createRow(0);
@@ -63,12 +62,6 @@ public class Main {
             return 0;
         }
 
-        /**
-         * 小标题的样式
-         *
-         * @param workbook
-         * @return
-         */
         public CellStyle title(Workbook workbook) {
             CellStyle style = workbook.createCellStyle();
             Font font = workbook.createFont();
@@ -76,23 +69,13 @@ public class Main {
             font.setBold(true);
             font.setFontHeightInPoints((short) 12);
 
-            style.setAlignment(HorizontalAlignment.CENTER);          //横向居中
-            style.setVerticalAlignment(VerticalAlignment.CENTER);    //纵向居中
+            style.setAlignment(HorizontalAlignment.CENTER);          
+            style.setVerticalAlignment(VerticalAlignment.CENTER); 
             style.setFont(font);
 
             return style;
         }
 
-        private void setCellValue(Cell cell, Object value) {
-            cell.setCellValue(Objects.toString(value, ""));
-        }
-
-        /**
-         * 文字样式
-         *
-         * @param workbook
-         * @return
-         */
         public CellStyle text(Workbook workbook) {
             CellStyle style = workbook.createCellStyle();
             Font font = workbook.createFont();
@@ -101,8 +84,8 @@ public class Main {
 
             style.setFont(font);
 
-            style.setAlignment(HorizontalAlignment.LEFT);          //横向居左
-            style.setVerticalAlignment(VerticalAlignment.CENTER);    //纵向居中
+            style.setAlignment(HorizontalAlignment.LEFT);   
+            style.setVerticalAlignment(VerticalAlignment.CENTER); 
             return style;
         }
     }
