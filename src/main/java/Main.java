@@ -34,6 +34,7 @@ public class Main {
             try (OutputStream os = new FileOutputStream(file)) {
                 workbook.write(os);
                 workbook.close();
+                LOGGER.info("------------Output Successful");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -41,7 +42,7 @@ public class Main {
 
         @Override
         public int run(String... args) {
-            LOGGER.info("Application started");
+            LOGGER.info("------------Application started");
             Workbook workbook = new HSSFWorkbook();
             Sheet sheet = workbook.createSheet("Sheet 1");
             // 自适应宽度
