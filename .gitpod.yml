@@ -9,7 +9,8 @@ tasks:
       export QUARKUS_LAUNCH_DEVMODE=true
       chmod +x mvnw
     command: |
-      ./mvnw quarkus:dev
+      ./mvnw -B -U clean package -Dmaven.test.skip=true -Pnative -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 -Dquarkus.container-image.image=cjbi/quarkus-poi-test
+      docker run cjbi/quarkus-poi-test
     name: Run Example app
 
 vscode:
