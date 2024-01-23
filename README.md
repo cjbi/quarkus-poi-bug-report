@@ -1,10 +1,6 @@
 # quarkus-poi-bug-report
 
-Link With https://github.com/quarkiverse/quarkus-poi/issues/95
-
-```shell
-./mvnw -B -U clean package -Pnative -Dmaven.test.skip=true -Dquarkus.container-image.push=true -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 -Dquarkus.container-image.image=cjbi/quarkus-poi-test
-```
+https://github.com/quarkiverse/quarkus-poi/issues/95
 
 ## Reproducer
 
