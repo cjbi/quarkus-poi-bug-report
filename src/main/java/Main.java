@@ -53,7 +53,8 @@ public class Main {
             int cellLength = 20;
             while (cellNo < cellLength) {
                 Cell cell = headRow.createCell(cellNo++);
-                cell.setCellStyle(title(workbook));
+                CellStyle style = workbook.createCellStyle();
+                cell.setCellStyle(style);
                 cell.setCellValue("test name" + cellNo);
             }
 
@@ -62,32 +63,6 @@ public class Main {
             return 0;
         }
 
-        public CellStyle title(Workbook workbook) {
-            CellStyle style = workbook.createCellStyle();
-            Font font = workbook.createFont();
-            font.setFontName("黑体");
-            font.setBold(true);
-            font.setFontHeightInPoints((short) 12);
-
-            style.setAlignment(HorizontalAlignment.CENTER);          
-            style.setVerticalAlignment(VerticalAlignment.CENTER); 
-            style.setFont(font);
-
-            return style;
-        }
-
-        public CellStyle text(Workbook workbook) {
-            CellStyle style = workbook.createCellStyle();
-            Font font = workbook.createFont();
-            font.setFontName("黑体");
-            font.setFontHeightInPoints((short) 12);
-
-            style.setFont(font);
-
-            style.setAlignment(HorizontalAlignment.LEFT);   
-            style.setVerticalAlignment(VerticalAlignment.CENTER); 
-            return style;
-        }
     }
 
 }
