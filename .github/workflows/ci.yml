@@ -9,8 +9,7 @@ on:
 
 jobs:
   build-image:
-    name: Push docker image
-    needs: [ test ]
+    name: Build the docker image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
