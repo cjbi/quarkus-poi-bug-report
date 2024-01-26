@@ -1,0 +1,32 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Maven CI
+
+on:
+  push:
+    branches: [ graalvm-ce ]
+
+jobs:
+  build-image:
+    name: Build the docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build Image with Maven
+        run: |
+          ./mvnw -B -U clean package -Pnative -Dquarkus.container-image.build=true -Dquarkus.container-image.image=cjbi/quarkus-poi-test
+          docker run cjbi/quarkus-poi-test
+      - name: Caching Maven Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
