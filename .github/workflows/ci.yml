@@ -21,7 +21,7 @@ jobs:
           cache: maven
       - name: Build Image with Maven
         run: |
-          ./mvnw -B -U clean package -Dmaven.test.skip=true -Pnative -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 -Dquarkus.container-image.image=cjbi/quarkus-poi-test
+          ./mvnw -B -U clean package -Dmaven.test.skip=true -Pnative -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 -Dquarkus.container-image.image=cjbi/quarkus-poi-test
           docker run cjbi/quarkus-poi-test
       - name: Caching Maven Dependencies
         uses: actions/cache@v2
